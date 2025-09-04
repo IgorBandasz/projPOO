@@ -5,6 +5,9 @@
  */
 package view;
 
+import controller.UsuarioController;
+import javax.swing.JOptionPane;
+import model.Usuario;
 import utils.Util;
 
 /**
@@ -39,13 +42,15 @@ public class FrCadUsuario extends javax.swing.JDialog {
     lblDataNascimento = new javax.swing.JLabel();
     btnSalvar = new javax.swing.JButton();
     btnCancelar = new javax.swing.JButton();
-    jTextField1 = new javax.swing.JTextField();
-    jTextField2 = new javax.swing.JTextField();
+    edtEmail = new javax.swing.JTextField();
+    edtNome = new javax.swing.JTextField();
     jTextField3 = new javax.swing.JTextField();
-    jPasswordField1 = new javax.swing.JPasswordField();
-    jFormattedTextField1 = new javax.swing.JFormattedTextField();
+    edtSenha = new javax.swing.JPasswordField();
+    edtDataNascimento = new javax.swing.JFormattedTextField();
     chkAtivo = new javax.swing.JCheckBox();
     imgTitulo = new javax.swing.JLabel();
+    lblConfirmeSenha = new javax.swing.JLabel();
+    edtConfirmeSenha = new javax.swing.JPasswordField();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Cadastro de Usuário - Projeto POO");
@@ -62,50 +67,84 @@ public class FrCadUsuario extends javax.swing.JDialog {
     lblTitulo.setText("Cadastro de Usuário");
     pnlPrincipal.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
 
+    lblNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     lblNome.setText("Nome");
     pnlPrincipal.add(lblNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
 
+    lblEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     lblEmail.setText("E-mail");
     pnlPrincipal.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
 
+    lblSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     lblSenha.setText("Senha");
     pnlPrincipal.add(lblSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
 
+    lblDataNascimento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     lblDataNascimento.setText("Data Nascimento");
-    pnlPrincipal.add(lblDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, 20));
+    pnlPrincipal.add(lblDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, 20));
 
     btnSalvar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
     btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
     btnSalvar.setText("Salvar");
-    pnlPrincipal.add(btnSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 350, 130, -1));
+    btnSalvar.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        btnSalvarMouseClicked(evt);
+      }
+    });
+    pnlPrincipal.add(btnSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 130, -1));
 
     btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
     btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel.png"))); // NOI18N
     btnCancelar.setText("Cancelar");
-    pnlPrincipal.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 130, -1));
-    pnlPrincipal.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 250, -1));
-    pnlPrincipal.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 250, -1));
+    btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        btnCancelarMouseClicked(evt);
+      }
+    });
+    btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnCancelarActionPerformed(evt);
+      }
+    });
+    pnlPrincipal.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 130, -1));
+
+    edtEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    pnlPrincipal.add(edtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 250, -1));
+
+    edtNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    pnlPrincipal.add(edtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 250, -1));
     pnlPrincipal.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 250, -1));
-    pnlPrincipal.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 250, -1));
 
-    jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
-    pnlPrincipal.add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 285, 120, -1));
+    edtSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    pnlPrincipal.add(edtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 250, -1));
 
+    edtDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
+    edtDataNascimento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    pnlPrincipal.add(edtDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 120, -1));
+
+    chkAtivo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
     chkAtivo.setText("Ativo");
-    pnlPrincipal.add(chkAtivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, -1, -1));
+    pnlPrincipal.add(chkAtivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, -1, -1));
 
     imgTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add_user.png"))); // NOI18N
     pnlPrincipal.add(imgTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+    lblConfirmeSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    lblConfirmeSenha.setText("Confirme a senha");
+    pnlPrincipal.add(lblConfirmeSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
+
+    edtConfirmeSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    pnlPrincipal.add(edtConfirmeSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 250, -1));
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+      .addComponent(pnlPrincipal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+      .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
     );
 
     pack();
@@ -115,6 +154,93 @@ public class FrCadUsuario extends javax.swing.JDialog {
     this.setIconImage(Util.getIcone());
   }//GEN-LAST:event_formWindowOpened
 
+  private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
+    this.dispose();
+  }//GEN-LAST:event_btnCancelarMouseClicked
+
+  private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_btnCancelarActionPerformed
+
+  private void btnSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarMouseClicked
+    gravar();
+  }//GEN-LAST:event_btnSalvarMouseClicked
+
+  private void gravar(){
+    //validar o preenchimento dos campos
+    if(!verificarCampos()){
+      return;
+    }
+    
+    //ler os campos e guardar num objeto
+    Usuario usu = new Usuario();
+    usu.setNome(edtNome.getText()); 
+    usu.setEmail(edtEmail.getText());
+    usu.setSenha(Util.calcularHash(new String(edtSenha.getPassword())));
+    usu.setDataNascimento(Util.converterStringToDate(edtDataNascimento.getText()));    
+    usu.setAtivo(chkAtivo.isSelected());
+    
+    //enviar para o banco de dados
+    UsuarioController controller = new UsuarioController();
+    if(controller.inserir(usu)){
+      JOptionPane.showMessageDialog(null, "Usuário inserido");
+      this.dispose();
+    }
+  }
+  
+  private boolean verificarCampos(){
+    if(edtNome.getText().isEmpty()){
+      JOptionPane.showMessageDialog(null, "Campo 'Nome' em branco");
+      return false;
+    }
+    if(edtEmail.getText().isEmpty()){
+      JOptionPane.showMessageDialog(null, "Campo 'E-mail' em branco");
+      return false;
+    }
+    if(new String(edtSenha.getPassword()).isEmpty()){
+      JOptionPane.showMessageDialog(null, "Campo 'Senha' em branco");
+      return false;
+    }
+    //^ - Início de linha
+    //$ - final de linha
+    //[] - conjunto de caracteres
+    //+ - quantidade de vezes que o conjunto pode aparecer
+    //+ - 1 ou mais vezes
+    //* - 0 ou mais vezes
+    //{5} - 5 vezes
+    //{2} - 2 vezes
+    if (!edtNome.getText().matches("^[\\p{L} ]+$")) {//a- [a-zA-Z]
+      JOptionPane.showMessageDialog(null,
+              "O campo 'Nome' possui formato inválido");
+      return false;
+    }
+    if (!edtEmail.getText().matches("^[a-z0-9_.]+@[a-z0-9_.]+.[a-z]+$")) {
+      JOptionPane.showMessageDialog(null,
+              "O campo 'Email' possui formato inválido");
+      return false;
+    }
+    if (!edtDataNascimento.getText().matches("^[0-9]{2}/[0-9]{2}/[0-9]{4}$")) {
+      JOptionPane.showMessageDialog(null,
+              "O campo 'Data Nascimento' possui formato inválido");
+      return false;
+    }
+    if(new String(edtSenha.getPassword()).length() < 6){
+      JOptionPane.showMessageDialog(null,
+              "A senha deve ser maior que 6 dígitos");
+      return false;
+    }
+    
+    String senha = new String(edtSenha.getPassword());
+    String confirmaSenha = new String(edtConfirmeSenha.getPassword());
+    if(!senha.equals(confirmaSenha)){
+      JOptionPane.showMessageDialog(null,
+              "As senhas devem ser iguais");
+      return false;
+    }
+    
+    return true;
+  }
+  
   /**
    * @param args the command line arguments
    */
@@ -161,12 +287,14 @@ public class FrCadUsuario extends javax.swing.JDialog {
   private javax.swing.JButton btnCancelar;
   private javax.swing.JButton btnSalvar;
   private javax.swing.JCheckBox chkAtivo;
+  private javax.swing.JPasswordField edtConfirmeSenha;
+  private javax.swing.JFormattedTextField edtDataNascimento;
+  private javax.swing.JTextField edtEmail;
+  private javax.swing.JTextField edtNome;
+  private javax.swing.JPasswordField edtSenha;
   private javax.swing.JLabel imgTitulo;
-  private javax.swing.JFormattedTextField jFormattedTextField1;
-  private javax.swing.JPasswordField jPasswordField1;
-  private javax.swing.JTextField jTextField1;
-  private javax.swing.JTextField jTextField2;
   private javax.swing.JTextField jTextField3;
+  private javax.swing.JLabel lblConfirmeSenha;
   private javax.swing.JLabel lblDataNascimento;
   private javax.swing.JLabel lblEmail;
   private javax.swing.JLabel lblNome;
