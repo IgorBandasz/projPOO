@@ -108,4 +108,52 @@ public class UsuarioController {
     }  
     return false;
   }
+  
+  public List<Usuario> consultar(){
+    //Montar o comando a ser executado
+    //os ? são variáveis que são preenchidas mais adiante
+    String sql = "SELECT * from TBUSUARIO ";
+    
+    //Cria uma instância do gerenciador de conexão
+    //(conexão com o banco de dados),
+    GerenciadorConexao gerenciador = new GerenciadorConexao();
+    
+    //Declara as variáveis como nulas antes do try 
+    //para poder usar no finally
+    PreparedStatement comando = null;
+    ResultSet resultado = null;
+    
+    //crio a lista de usuários, vazia ainda
+    List<Usuario> lista = new ArrayList<>();
+    
+    try{
+      //prepara o sql, analisando o formato e as váriaveis
+      comando = gerenciador.prepararComando(sql);
+      
+      //executa o comando e guarda o resultado da consulta 
+      //o resultado é semelhante a uma grade
+      resultado = comando.executeQuery();
+
+      while(resultado.next()){
+        Usuario usu = new Usuario();
+        
+        usu.setPkUsuario(resultado.getInt("pkUsuario"));
+        usu.setNome(resultado.getString("nome"));
+        usu.setEmail(resultado.getString("email"));
+        usu.setSenha(resultado.getString("senha")); //É o HASH
+        usu.setDataNascimento(resultado.getDate("dataNasc")); 
+        usu.setAtivo(resultado.getBoolean("ativo")); 
+        
+        lista.add(usu);
+      }
+    } catch (SQLException e) {
+      //caso ocorra um erro relacionado ao banco de dados
+      //exibe popup com o erro
+      JOptionPane.showMessageDialog(null, e.getMessage());      
+    } finally {
+      //depois de executar o try, dando erro ou não executa o finally
+      gerenciador.fecharConexao(comando, resultado);
+    }  
+    return lista;
+  }
 }

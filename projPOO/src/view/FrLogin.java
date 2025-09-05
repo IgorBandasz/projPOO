@@ -147,7 +147,7 @@ public class FrLogin extends javax.swing.JFrame {
     }
     //ler os campos
     String usuario = edtUsuario.getText();
-    String senha = new String(edtSenha.getPassword());
+    String senha = Util.calcularHash(new String(edtSenha.getPassword()));
 
     //consultar no banco de dados
     UsuarioController controller = new UsuarioController();

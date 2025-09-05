@@ -134,7 +134,8 @@ public class FrMenu extends javax.swing.JFrame {
   }//GEN-LAST:event_jMenuItem1ActionPerformed
 
   private void miConUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConUsuariosActionPerformed
-    // TODO add your handling code here:
+    FrConUsuario telaConUsuario = new FrConUsuario(this, rootPaneCheckingEnabled);
+    telaConUsuario.setVisible(true);
   }//GEN-LAST:event_miConUsuariosActionPerformed
 
   private void miSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSairActionPerformed
