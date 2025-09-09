@@ -8,6 +8,7 @@ package view;
 import controller.UsuarioController;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import javax.swing.JOptionPane;
 import model.Usuario;
 import utils.Util;
 
@@ -44,6 +45,8 @@ public class FrConUsuario extends javax.swing.JDialog {
     edtFiltro = new javax.swing.JTextField();
     cbxFiltro = new javax.swing.JComboBox<>();
     btnAlterar = new javax.swing.JButton();
+    jLabel1 = new javax.swing.JLabel();
+    btnDeletar = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Consulta de Usuários - Projeto POO");
@@ -55,21 +58,23 @@ public class FrConUsuario extends javax.swing.JDialog {
     lblTitulo.setText("Consulta de Usuários");
     pnlPrincipal.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 23, -1, -1));
 
+    btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back.png"))); // NOI18N
     btnVoltar.setText("Voltar");
     btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
       public void mouseClicked(java.awt.event.MouseEvent evt) {
         btnVoltarMouseClicked(evt);
       }
     });
-    pnlPrincipal.add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
+    pnlPrincipal.add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
 
+    btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
     btnPesquisar.setText("Pesquisar");
     btnPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
       public void mouseClicked(java.awt.event.MouseEvent evt) {
         btnPesquisarMouseClicked(evt);
       }
     });
-    pnlPrincipal.add(btnPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, -1, -1));
+    pnlPrincipal.add(btnPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 75, -1, -1));
 
     tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][] {
@@ -100,18 +105,31 @@ public class FrConUsuario extends javax.swing.JDialog {
     jScrollPane1.setViewportView(tblUsuarios);
 
     pnlPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 480, 196));
-    pnlPrincipal.add(edtFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 160, -1));
+    pnlPrincipal.add(edtFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 160, -1));
 
     cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código igual a", "Nome contendo", "E-mail contendo", "Usuários Ativos" }));
-    pnlPrincipal.add(cbxFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 190, -1));
+    pnlPrincipal.add(cbxFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 190, -1));
 
+    btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
     btnAlterar.setText("Alterar");
     btnAlterar.addMouseListener(new java.awt.event.MouseAdapter() {
       public void mouseClicked(java.awt.event.MouseEvent evt) {
         btnAlterarMouseClicked(evt);
       }
     });
-    pnlPrincipal.add(btnAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, -1, -1));
+    pnlPrincipal.add(btnAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, -1, -1));
+
+    jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cons_user.png"))); // NOI18N
+    pnlPrincipal.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, -1, -1));
+
+    btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/trash.png"))); // NOI18N
+    btnDeletar.setText("Deletar");
+    btnDeletar.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        btnDeletarMouseClicked(evt);
+      }
+    });
+    pnlPrincipal.add(btnDeletar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 330, -1, -1));
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -155,7 +173,36 @@ public class FrConUsuario extends javax.swing.JDialog {
     //passo pra tela e alteração o código do usuário selecionado
     telaAlterar.setPkUsuario(pkUsuario);
     telaAlterar.setVisible(true);
+    
+    //Quando fechar a janela de alterar vai continuar aqui
+    //refazendo a pesquisa da grade para atualizar
+    pesquisar();
   }//GEN-LAST:event_btnAlterarMouseClicked
+
+  private void btnDeletarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletarMouseClicked
+    //Valido se tem alguma linha selecionada na grade = -1
+    if (tblUsuarios.getSelectedRow() == -1) {
+      return; //encerro a função
+    }  
+    
+    //pego o número da linha selecionada
+    int posicaoLinha = tblUsuarios.getSelectedRow();
+    
+    //pegar o valor da célula na grade, na coluna 0 (Código)
+    String celula = tblUsuarios.getValueAt(posicaoLinha, 0).toString();
+    
+    int pkUsuario = Integer.parseInt(celula);
+    
+    //Passar para o controller para remover do banco de dados
+    UsuarioController controller = new UsuarioController();
+    
+    if(controller.deletar(pkUsuario)){
+      JOptionPane.showMessageDialog(null, "Usuário deletado");
+      pesquisar();
+    }else{
+      JOptionPane.showMessageDialog(null, "Falha ao deletar");
+    }
+  }//GEN-LAST:event_btnDeletarMouseClicked
 
   private void pesquisar(){
     //Pega o modelo da grade com suas colunas 
@@ -238,10 +285,12 @@ public class FrConUsuario extends javax.swing.JDialog {
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton btnAlterar;
+  private javax.swing.JButton btnDeletar;
   private javax.swing.JButton btnPesquisar;
   private javax.swing.JButton btnVoltar;
   private javax.swing.JComboBox<String> cbxFiltro;
   private javax.swing.JTextField edtFiltro;
+  private javax.swing.JLabel jLabel1;
   private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JLabel lblTitulo;
   private javax.swing.JPanel pnlPrincipal;

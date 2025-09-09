@@ -6,6 +6,8 @@
 package view;
 
 import controller.UsuarioController;
+import java.io.File;
+import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import utils.Util;
@@ -51,6 +53,9 @@ public class FrCadUsuario extends javax.swing.JDialog {
     imgTitulo = new javax.swing.JLabel();
     lblConfirmeSenha = new javax.swing.JLabel();
     edtConfirmeSenha = new javax.swing.JPasswordField();
+    pnlFoto = new javax.swing.JPanel();
+    imgFoto = new javax.swing.JLabel();
+    btnEscolherImagem = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Cadastro de Usuário - Projeto POO");
@@ -69,19 +74,19 @@ public class FrCadUsuario extends javax.swing.JDialog {
 
     lblNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     lblNome.setText("Nome");
-    pnlPrincipal.add(lblNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+    pnlPrincipal.add(lblNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
     lblEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     lblEmail.setText("E-mail");
-    pnlPrincipal.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
+    pnlPrincipal.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
 
     lblSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     lblSenha.setText("Senha");
-    pnlPrincipal.add(lblSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
+    pnlPrincipal.add(lblSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
 
     lblDataNascimento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     lblDataNascimento.setText("Data Nascimento");
-    pnlPrincipal.add(lblDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, 20));
+    pnlPrincipal.add(lblDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, -1, 20));
 
     btnSalvar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
     btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
@@ -91,7 +96,7 @@ public class FrCadUsuario extends javax.swing.JDialog {
         btnSalvarMouseClicked(evt);
       }
     });
-    pnlPrincipal.add(btnSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 130, -1));
+    pnlPrincipal.add(btnSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, 130, -1));
 
     btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
     btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel.png"))); // NOI18N
@@ -106,35 +111,51 @@ public class FrCadUsuario extends javax.swing.JDialog {
         btnCancelarActionPerformed(evt);
       }
     });
-    pnlPrincipal.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 130, -1));
+    pnlPrincipal.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 130, -1));
 
     edtEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    pnlPrincipal.add(edtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 250, -1));
+    pnlPrincipal.add(edtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 250, -1));
 
     edtNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    pnlPrincipal.add(edtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 250, -1));
-    pnlPrincipal.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 250, -1));
+    pnlPrincipal.add(edtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 250, -1));
+    pnlPrincipal.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 250, -1));
 
     edtSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    pnlPrincipal.add(edtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 250, -1));
+    pnlPrincipal.add(edtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 250, -1));
 
     edtDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
     edtDataNascimento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    pnlPrincipal.add(edtDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 120, -1));
+    pnlPrincipal.add(edtDataNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 120, -1));
 
     chkAtivo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
     chkAtivo.setText("Ativo");
-    pnlPrincipal.add(chkAtivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, -1, -1));
+    pnlPrincipal.add(chkAtivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 420, -1, -1));
 
     imgTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add_user.png"))); // NOI18N
     pnlPrincipal.add(imgTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
     lblConfirmeSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     lblConfirmeSenha.setText("Confirme a senha");
-    pnlPrincipal.add(lblConfirmeSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
+    pnlPrincipal.add(lblConfirmeSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
 
     edtConfirmeSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    pnlPrincipal.add(edtConfirmeSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 250, -1));
+    pnlPrincipal.add(edtConfirmeSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 250, -1));
+
+    pnlFoto.setBackground(new java.awt.Color(255, 255, 255));
+    pnlFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    pnlFoto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+    pnlFoto.add(imgFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 100));
+
+    pnlPrincipal.add(pnlFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 100, 100));
+
+    btnEscolherImagem.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+    btnEscolherImagem.setText("Escolher imagem");
+    btnEscolherImagem.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        btnEscolherImagemMouseClicked(evt);
+      }
+    });
+    pnlPrincipal.add(btnEscolherImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, -1, -1));
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -144,7 +165,7 @@ public class FrCadUsuario extends javax.swing.JDialog {
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+      .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
     );
 
     pack();
@@ -166,6 +187,22 @@ public class FrCadUsuario extends javax.swing.JDialog {
     gravar();
   }//GEN-LAST:event_btnSalvarMouseClicked
 
+  private void btnEscolherImagemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEscolherImagemMouseClicked
+    //escolher a imagem
+    File arquivo = Util.escolherImagem();
+    
+    //carrega a imagem se selecionou um arquivo
+    if(arquivo != null){
+      //Converte para um ícone
+      Icon icone = Util.converterFileToIcon(arquivo);
+    
+      //redimensiono a imagem para caber no imgFoto
+      Icon iconeNovo = Util.redimensionarImagem(icone, 100, 100);
+      
+      imgFoto.setIcon(iconeNovo);
+    }
+  }//GEN-LAST:event_btnEscolherImagemMouseClicked
+
   private void gravar(){
     //validar o preenchimento dos campos
     if(!verificarCampos()){
@@ -179,6 +216,7 @@ public class FrCadUsuario extends javax.swing.JDialog {
     usu.setSenha(Util.calcularHash(new String(edtSenha.getPassword())));
     usu.setDataNascimento(Util.converterStringToDate(edtDataNascimento.getText()));    
     usu.setAtivo(chkAtivo.isSelected());
+    usu.setImagem(imgFoto.getIcon());
     
     //enviar para o banco de dados
     UsuarioController controller = new UsuarioController();
@@ -285,6 +323,7 @@ public class FrCadUsuario extends javax.swing.JDialog {
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton btnCancelar;
+  private javax.swing.JButton btnEscolherImagem;
   private javax.swing.JButton btnSalvar;
   private javax.swing.JCheckBox chkAtivo;
   private javax.swing.JPasswordField edtConfirmeSenha;
@@ -292,6 +331,7 @@ public class FrCadUsuario extends javax.swing.JDialog {
   private javax.swing.JTextField edtEmail;
   private javax.swing.JTextField edtNome;
   private javax.swing.JPasswordField edtSenha;
+  private javax.swing.JLabel imgFoto;
   private javax.swing.JLabel imgTitulo;
   private javax.swing.JTextField jTextField3;
   private javax.swing.JLabel lblConfirmeSenha;
@@ -300,6 +340,7 @@ public class FrCadUsuario extends javax.swing.JDialog {
   private javax.swing.JLabel lblNome;
   private javax.swing.JLabel lblSenha;
   private javax.swing.JLabel lblTitulo;
+  private javax.swing.JPanel pnlFoto;
   private javax.swing.JPanel pnlPrincipal;
   // End of variables declaration//GEN-END:variables
 }

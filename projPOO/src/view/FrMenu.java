@@ -110,6 +110,11 @@ public class FrMenu extends javax.swing.JFrame {
     mnbPrincipal.add(mnConsultas);
 
     mnSobre.setText("Sobre");
+    mnSobre.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        mnSobreMouseClicked(evt);
+      }
+    });
     mnbPrincipal.add(mnSobre);
 
     setJMenuBar(mnbPrincipal);
@@ -146,6 +151,11 @@ public class FrMenu extends javax.swing.JFrame {
     // Define o ícone da janela
     this.setIconImage(Util.getIcone());
   }//GEN-LAST:event_formWindowOpened
+
+  private void mnSobreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnSobreMouseClicked
+    FrSobre telaSobre = new FrSobre(this, rootPaneCheckingEnabled);
+    telaSobre.setVisible(true);
+  }//GEN-LAST:event_mnSobreMouseClicked
 
   /**
    * @param args the command line arguments
