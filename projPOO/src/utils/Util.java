@@ -168,8 +168,7 @@ public class Util {
       Logger.getLogger(Util.class.getName()).log(
               Level.SEVERE, null, erro);
     }
-    return byteArray.toByteArray();
-    
+    return byteArray.toByteArray();    
   }
   
 }
