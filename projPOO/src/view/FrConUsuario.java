@@ -47,6 +47,7 @@ public class FrConUsuario extends javax.swing.JDialog {
     btnAlterar = new javax.swing.JButton();
     jLabel1 = new javax.swing.JLabel();
     btnDeletar = new javax.swing.JButton();
+    lblTotalRegistros = new javax.swing.JLabel();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Consulta de Usuários - Projeto POO");
@@ -65,7 +66,7 @@ public class FrConUsuario extends javax.swing.JDialog {
         btnVoltarMouseClicked(evt);
       }
     });
-    pnlPrincipal.add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
+    pnlPrincipal.add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
 
     btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
     btnPesquisar.setText("Pesquisar");
@@ -117,7 +118,7 @@ public class FrConUsuario extends javax.swing.JDialog {
         btnAlterarMouseClicked(evt);
       }
     });
-    pnlPrincipal.add(btnAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, -1, -1));
+    pnlPrincipal.add(btnAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, -1, -1));
 
     jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cons_user.png"))); // NOI18N
     pnlPrincipal.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, -1, -1));
@@ -129,7 +130,10 @@ public class FrConUsuario extends javax.swing.JDialog {
         btnDeletarMouseClicked(evt);
       }
     });
-    pnlPrincipal.add(btnDeletar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 330, -1, -1));
+    pnlPrincipal.add(btnDeletar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, -1, -1));
+
+    lblTotalRegistros.setText("Total registros: 0");
+    pnlPrincipal.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -141,7 +145,9 @@ public class FrConUsuario extends javax.swing.JDialog {
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+      .addGroup(layout.createSequentialGroup()
+        .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(0, 0, Short.MAX_VALUE))
     );
 
     pack();
@@ -236,7 +242,8 @@ public class FrConUsuario extends javax.swing.JDialog {
       
       modeloTabela.addRow(linha);
     }
-    
+    //o método size() retorna quantos itens tem no List
+    lblTotalRegistros.setText("Total registros: " + listaUsuarios.size());
   }
   
   
@@ -293,6 +300,7 @@ public class FrConUsuario extends javax.swing.JDialog {
   private javax.swing.JLabel jLabel1;
   private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JLabel lblTitulo;
+  private javax.swing.JLabel lblTotalRegistros;
   private javax.swing.JPanel pnlPrincipal;
   private javax.swing.JTable tblUsuarios;
   // End of variables declaration//GEN-END:variables

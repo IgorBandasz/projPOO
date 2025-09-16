@@ -15,13 +15,19 @@ import model.Usuario;
  * @author iband
  */
 public class FrPreencherCombo extends javax.swing.JDialog {
-
+  
+  private Usuario usuarioSelecionado;
+  
   /**
    * Creates new form FrTeste2
    */
   public FrPreencherCombo(java.awt.Frame parent, boolean modal) {
     super(parent, modal);
     initComponents();
+  }
+  
+  public Usuario getUsuarioSelecionado(){
+    return usuarioSelecionado;
   }
 
   /**
@@ -40,6 +46,8 @@ public class FrPreencherCombo extends javax.swing.JDialog {
     jLabel1 = new javax.swing.JLabel();
     jLabel2 = new javax.swing.JLabel();
     jLabel3 = new javax.swing.JLabel();
+    btnSelecionar = new javax.swing.JButton();
+    btnVoltar = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -69,8 +77,24 @@ public class FrPreencherCombo extends javax.swing.JDialog {
     jLabel2.setText("Selecione a ComboBox, abra as propriedades clicando com o botão direito");
     pnlPrincipal.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
-    jLabel3.setText("na aba \"Código\" altere a propriedade \"Parêmetros de Tipo\" e coloque a <SuaClasse>");
+    jLabel3.setText("na aba \"Código\" altere a propriedade \"Parâmetros de Tipo\" e coloque a <SuaClasse>");
     pnlPrincipal.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+
+    btnSelecionar.setText("Selecionar");
+    btnSelecionar.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        btnSelecionarMouseClicked(evt);
+      }
+    });
+    pnlPrincipal.add(btnSelecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, -1, -1));
+
+    btnVoltar.setText("Voltar");
+    btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        btnVoltarMouseClicked(evt);
+      }
+    });
+    pnlPrincipal.add(btnVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -80,10 +104,11 @@ public class FrPreencherCombo extends javax.swing.JDialog {
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
     );
 
     pack();
+    setLocationRelativeTo(null);
   }// </editor-fold>//GEN-END:initComponents
 
   private void btnAddUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddUsuariosMouseClicked
@@ -112,6 +137,20 @@ public class FrPreencherCombo extends javax.swing.JDialog {
     }
 
   }//GEN-LAST:event_btnLerCampoMouseClicked
+
+  private void btnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseClicked
+    this.dispose();
+  }//GEN-LAST:event_btnVoltarMouseClicked
+
+  private void btnSelecionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSelecionarMouseClicked
+    int indexSelecionado = cbxUsuarios.getSelectedIndex();
+    
+    //com o index eu consigo pegar o objeto inteiro de dentro da ComboBox
+    
+    usuarioSelecionado = cbxUsuarios.getItemAt(indexSelecionado);
+    
+    this.dispose();
+  }//GEN-LAST:event_btnSelecionarMouseClicked
 
   /**
    * @param args the command line arguments
@@ -161,6 +200,8 @@ public class FrPreencherCombo extends javax.swing.JDialog {
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton btnAddUsuarios;
   private javax.swing.JButton btnLerCampo;
+  private javax.swing.JButton btnSelecionar;
+  private javax.swing.JButton btnVoltar;
   private javax.swing.JComboBox<Usuario> cbxUsuarios;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
