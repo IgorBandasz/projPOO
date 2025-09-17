@@ -7,8 +7,6 @@ package view;
 
 import controller.UsuarioController;
 import java.awt.event.KeyEvent;
-import java.net.URL;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import utils.Util;
 

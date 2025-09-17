@@ -5,7 +5,13 @@
  */
 package view;
 
+import controller.UsuarioController;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.Usuario;
+import utils.Util;
 
 /**
  *
@@ -30,14 +36,26 @@ public class FrCadastro extends javax.swing.JDialog {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
+    jButton1 = new javax.swing.JButton();
     pnlPrincipal = new javax.swing.JPanel();
     lblUsuario = new javax.swing.JLabel();
     edtUsuario = new javax.swing.JTextField();
     btnBuscarUsuario = new javax.swing.JButton();
     edtCodUsuario = new javax.swing.JTextField();
     lblTitulo = new javax.swing.JLabel();
+    jScrollPane1 = new javax.swing.JScrollPane();
+    tblGrade = new javax.swing.JTable();
+    jLabel1 = new javax.swing.JLabel();
+    btnGravarLista = new javax.swing.JButton();
+
+    jButton1.setText("jButton1");
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    addWindowListener(new java.awt.event.WindowAdapter() {
+      public void windowOpened(java.awt.event.WindowEvent evt) {
+        formWindowOpened(evt);
+      }
+    });
 
     lblUsuario.setText("Usuário");
 
@@ -55,6 +73,43 @@ public class FrCadastro extends javax.swing.JDialog {
 
     lblTitulo.setText("Exemplo de buscar dados de usuário de outra tela");
 
+    tblGrade.setModel(new javax.swing.table.DefaultTableModel(
+      new Object [][] {
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null}
+      },
+      new String [] {
+        "Codigo", "Nome", "Selecionado"
+      }
+    ) {
+      Class[] types = new Class [] {
+        java.lang.String.class, java.lang.Object.class, java.lang.Boolean.class
+      };
+      boolean[] canEdit = new boolean [] {
+        false, false, true
+      };
+
+      public Class getColumnClass(int columnIndex) {
+        return types [columnIndex];
+      }
+
+      public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return canEdit [columnIndex];
+      }
+    });
+    jScrollPane1.setViewportView(tblGrade);
+
+    jLabel1.setText("Exemplo marcar opções numa grade");
+
+    btnGravarLista.setText("Gravar Lista");
+    btnGravarLista.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        btnGravarListaMouseClicked(evt);
+      }
+    });
+
     javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
     pnlPrincipal.setLayout(pnlPrincipalLayout);
     pnlPrincipalLayout.setHorizontalGroup(
@@ -66,15 +121,20 @@ public class FrCadastro extends javax.swing.JDialog {
             .addComponent(lblTitulo))
           .addGroup(pnlPrincipalLayout.createSequentialGroup()
             .addGap(24, 24, 24)
-            .addComponent(edtCodUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(lblUsuario)
+              .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
               .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addComponent(edtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(edtCodUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBuscarUsuario)))))
-        .addContainerGap(30, Short.MAX_VALUE))
+                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addComponent(lblUsuario)
+                  .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                    .addComponent(edtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(btnBuscarUsuario))
+                  .addComponent(jLabel1)))
+              .addComponent(btnGravarLista, javax.swing.GroupLayout.Alignment.TRAILING))))
+        .addContainerGap(41, Short.MAX_VALUE))
     );
     pnlPrincipalLayout.setVerticalGroup(
       pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,7 +148,13 @@ public class FrCadastro extends javax.swing.JDialog {
           .addComponent(edtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(btnBuscarUsuario)
           .addComponent(edtCodUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addContainerGap(41, Short.MAX_VALUE))
+        .addGap(18, 18, 18)
+        .addComponent(jLabel1)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(btnGravarLista)
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -123,6 +189,66 @@ public class FrCadastro extends javax.swing.JDialog {
     }
   }//GEN-LAST:event_btnBuscarUsuarioMouseClicked
 
+  private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+    carregarGrade();
+  }//GEN-LAST:event_formWindowOpened
+
+  private void btnGravarListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGravarListaMouseClicked
+    //crio uma lista de Usuario
+    List<Usuario> listaSelecionados = new ArrayList<>();
+    
+    //percorro todas as linhas da grade
+    for(int index=0; index < tblGrade.getRowCount(); index++){
+      //pego o texto da coluna "Selecionado"
+      String celula = tblGrade.getValueAt(index, 2).toString();
+      
+      //converto o texto da célula em boolean
+      boolean selecionado = Boolean.parseBoolean(celula);
+      
+      //Se está selecionado adiciono na lista
+      if (selecionado){
+        //Pego o conteúdo da coluna "Nome" que contém o Usuario inteiro
+        //A grade só sabe que o tipo de dado é Object que é uma
+        //classe genérica, pode ser qualquer coisa
+        Object objeto = tblGrade.getValueAt(index, 1);
+        
+        //para adicionar o objeto na lista forço o programa a ler 
+        //a variável objeto como sendo do tipo Usuario atráves da expressão
+        //(Usuario) objeto
+        listaSelecionados.add((Usuario) objeto);
+      }
+    }
+    
+    for(Usuario usu: listaSelecionados){
+      JOptionPane.showMessageDialog(null, usu.getNome());
+    }
+  }//GEN-LAST:event_btnGravarListaMouseClicked
+
+  
+  public void carregarGrade(){
+    //Pega o modelo da grade com suas colunas 
+    DefaultTableModel modeloTabela = (DefaultTableModel) tblGrade.getModel();
+
+    //Limpa a grade setando o número de linhas para zero
+    modeloTabela.setNumRows(0);
+    
+    //consultar o banco de dados
+    UsuarioController controller = new UsuarioController();
+    
+    //passar os filtros pro método consultar
+    List<Usuario> listaUsuarios = controller.consultar(0, "");
+    
+    //preencher a grade
+    for(Usuario usu: listaUsuarios){
+      Object[] linha = {
+        usu.getPkUsuario(),  //coluna 0
+        usu, //coluna 1, guardei todo o Usuario
+        false //coluna 2, todos desmarcados
+      };
+      
+      modeloTabela.addRow(linha);
+    }
+  }
   /**
    * @param args the command line arguments
    */
@@ -167,10 +293,15 @@ public class FrCadastro extends javax.swing.JDialog {
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton btnBuscarUsuario;
+  private javax.swing.JButton btnGravarLista;
   private javax.swing.JTextField edtCodUsuario;
   private javax.swing.JTextField edtUsuario;
+  private javax.swing.JButton jButton1;
+  private javax.swing.JLabel jLabel1;
+  private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JLabel lblTitulo;
   private javax.swing.JLabel lblUsuario;
   private javax.swing.JPanel pnlPrincipal;
+  private javax.swing.JTable tblGrade;
   // End of variables declaration//GEN-END:variables
 }

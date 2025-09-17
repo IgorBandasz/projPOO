@@ -89,7 +89,7 @@ public class FrConUsuario extends javax.swing.JDialog {
       }
     ) {
       Class[] types = new Class [] {
-        java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+        java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
       };
       boolean[] canEdit = new boolean [] {
         false, false, false, false, false
@@ -234,7 +234,7 @@ public class FrConUsuario extends javax.swing.JDialog {
     for(Usuario usu: listaUsuarios){
       Object[] linha = {
         usu.getPkUsuario(),  //coluna 0
-        usu.getNome(), //coluna 1
+        usu, //coluna 1
         usu.getEmail(), //coluna 2
         Util.converterDateToString(usu.getDataNascimento()), //coluna 3
         usu.getAtivoString()  //coluna 4

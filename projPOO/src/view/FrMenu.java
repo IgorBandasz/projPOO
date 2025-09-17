@@ -61,7 +61,7 @@ public class FrMenu extends javax.swing.JFrame {
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
         .addGap(101, 101, 101)
         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addGap(89, 89, 89))
+        .addGap(126, 126, 126))
     );
     pnlPrincipalLayout.setVerticalGroup(
       pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
