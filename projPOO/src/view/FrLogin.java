@@ -8,6 +8,8 @@ package view;
 import controller.UsuarioController;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import model.Usuario;
+import model.UsuarioLogado;
 import utils.Util;
 
 /**
@@ -150,7 +152,11 @@ public class FrLogin extends javax.swing.JFrame {
     //consultar no banco de dados
     UsuarioController controller = new UsuarioController();
 
-    if (controller.autenticar(usuario, senha)) {
+    Usuario usu = controller.autenticar(usuario, senha); 
+    
+    if (usu != null) {
+      UsuarioLogado.setUsuarioLogado(usu);
+      
       //Entra no sistema
       FrMenu telaMenu = new FrMenu();
       telaMenu.setVisible(true);  

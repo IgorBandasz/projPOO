@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Usuario;
+import model.UsuarioLogado;
 import utils.Util;
 
 /**
@@ -47,6 +48,7 @@ public class FrCadastro extends javax.swing.JDialog {
     tblGrade = new javax.swing.JTable();
     jLabel1 = new javax.swing.JLabel();
     btnGravarLista = new javax.swing.JButton();
+    btnUsuarioLogado = new javax.swing.JButton();
 
     jButton1.setText("jButton1");
 
@@ -110,6 +112,13 @@ public class FrCadastro extends javax.swing.JDialog {
       }
     });
 
+    btnUsuarioLogado.setText("Usu Logado");
+    btnUsuarioLogado.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        btnUsuarioLogadoMouseClicked(evt);
+      }
+    });
+
     javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
     pnlPrincipal.setLayout(pnlPrincipalLayout);
     pnlPrincipalLayout.setHorizontalGroup(
@@ -121,7 +130,7 @@ public class FrCadastro extends javax.swing.JDialog {
             .addComponent(lblTitulo))
           .addGroup(pnlPrincipalLayout.createSequentialGroup()
             .addGap(24, 24, 24)
-            .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
               .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
               .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addComponent(edtCodUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -133,7 +142,10 @@ public class FrCadastro extends javax.swing.JDialog {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(btnBuscarUsuario))
                   .addComponent(jLabel1)))
-              .addComponent(btnGravarLista, javax.swing.GroupLayout.Alignment.TRAILING))))
+              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
+                .addComponent(btnUsuarioLogado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGravarLista)))))
         .addContainerGap(41, Short.MAX_VALUE))
     );
     pnlPrincipalLayout.setVerticalGroup(
@@ -153,7 +165,9 @@ public class FrCadastro extends javax.swing.JDialog {
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addComponent(btnGravarLista)
+        .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(btnGravarLista)
+          .addComponent(btnUsuarioLogado))
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
@@ -223,6 +237,12 @@ public class FrCadastro extends javax.swing.JDialog {
       JOptionPane.showMessageDialog(null, usu.getNome());
     }
   }//GEN-LAST:event_btnGravarListaMouseClicked
+
+  private void btnUsuarioLogadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuarioLogadoMouseClicked
+    Usuario usu = UsuarioLogado.getUsuarioLogado();
+    JOptionPane.showMessageDialog(null, usu);
+    
+  }//GEN-LAST:event_btnUsuarioLogadoMouseClicked
 
   
   public void carregarGrade(){
@@ -294,6 +314,7 @@ public class FrCadastro extends javax.swing.JDialog {
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton btnBuscarUsuario;
   private javax.swing.JButton btnGravarLista;
+  private javax.swing.JButton btnUsuarioLogado;
   private javax.swing.JTextField edtCodUsuario;
   private javax.swing.JTextField edtUsuario;
   private javax.swing.JButton jButton1;

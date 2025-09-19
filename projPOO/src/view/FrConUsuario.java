@@ -229,7 +229,8 @@ public class FrConUsuario extends javax.swing.JDialog {
     
     //passar os filtros pro método consultar
     List<Usuario> listaUsuarios = controller.consultar(opcaoFiltro, filtro);
-    
+    System.out.println();
+           
     //preencher a grade
     for(Usuario usu: listaUsuarios){
       Object[] linha = {

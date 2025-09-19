@@ -24,7 +24,7 @@ import utils.Util;
  * @author iband
  */
 public class UsuarioController {
-  public boolean autenticar(String usuario, String senha){
+   public Usuario autenticar(String usuario, String senha){
     //Montar o comando a ser executado
     //os ? são variáveis que são preenchidas mais adiante
     String sql = "SELECT * from TBUSUARIO "
@@ -39,6 +39,7 @@ public class UsuarioController {
     //para poder usar no finally
     PreparedStatement comando = null;
     ResultSet resultado = null;
+    Usuario usu = null;
     
     try{
       //prepara o sql, analisando o formato e as váriaveis
@@ -52,11 +53,20 @@ public class UsuarioController {
       //o resultado é semelhante a uma grade
       resultado = comando.executeQuery();
 
+      
+      
       //resultado.next() - tenta avançar para a próxima linha 
       //caso consiga retorna true
       if (resultado.next()) {
         //Se conseguiu avançar para a próxima linha é porque achou um usuário com aquele nome e senha
-        return true;
+        usu = new Usuario();
+        
+        usu.setPkUsuario(resultado.getInt("pkUsuario"));
+        usu.setNome(resultado.getString("nome"));
+        usu.setEmail(resultado.getString("email"));
+        usu.setSenha(resultado.getString("senha")); //É o HASH
+        usu.setDataNascimento(resultado.getDate("dataNasc")); 
+        usu.setAtivo(resultado.getBoolean("ativo"));
       }
     } catch (SQLException e) {
       //caso ocorra um erro relacionado ao banco de dados
@@ -66,7 +76,7 @@ public class UsuarioController {
       //depois de executar o try, dando erro ou não executa o finally
       gerenciador.fecharConexao(comando, resultado);
     }  
-    return false;
+    return usu;
   }
   
   public boolean inserir(Usuario usu){

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.sql.Connection;
@@ -13,29 +8,31 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
 /**
  * @author iband
  */
 public class GerenciadorConexao {
-   //static - terá o mesmo valor em todas as instâncias da classe
   //final - o valor da variável não mudará
-  private static final String URL = "jdbc:mysql://127.0.0.1:3306/dbprojeto";
-  private static final String USER = "root";
-  private static final String PASSWORD = "root";  
+  private final String URL = "jdbc:mysql://127.0.0.1:3306/dbprojeto";
+  private final String USER = "root";
+  private final String PASSWORD = "root";  
   
   private Connection conexao;
     
   public GerenciadorConexao() {
+    //tentar executar esse bloco de código
     try {
-      //tentar executar esse bloco de código
+      //Se conecta no banco de dados com as informações em URL, USER e PASSWORD
       conexao = DriverManager.getConnection(URL, USER, PASSWORD);
     } catch (SQLException e) { 
-      //caso ocora um SQLException irá executar o seguinte tratamento
-      JOptionPane.showMessageDialog(null, e.getMessage().toString());
+      //caso ocora um erro de SQLException irá executar o seguinte tratamento
+      JOptionPane.showMessageDialog(null, e.getMessage());
     }
   }
   
   //responsável por analisar o sql a ser executado (select, insert, delete, ...)
+  //verifica se há variáveis a serem preenchidas
   public PreparedStatement prepararComando(String sql) {
     PreparedStatement comando = null;
 
@@ -48,6 +45,8 @@ public class GerenciadorConexao {
     return comando;
   }
   
+  //Responsável por fechar a conexão com o banco de dados
+  //Tem 3 versões do fechamento da conexão
   //1ª definição
   public void fecharConexao() {
     try {
